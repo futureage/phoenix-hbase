@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="/home/hadoop/Downloads/phoenix-2.1.2-install/phoenix-2.1.2-client.jar" sourcepath="/home/hadoop/Downloads/phoenix-master/src/main/java"/>
+	<classpathentry kind="lib" path="/home/hadoop/Downloads/phoenix-master/src"/>
+	<classpathentry kind="lib" path="/home/hadoop/Downloads/hbase-0.94.13/hbase-0.94.13.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/ls/eclipse_work/NetpacketFilter/NetpacketFilter.jar"/>
+	<classpathentry kind="lib" path="/home/hadoop/ls/eclipse_work/phoenix-master/src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

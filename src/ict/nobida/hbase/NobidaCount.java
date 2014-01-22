@@ -4,6 +4,7 @@ import ict.nobida.utils.Init;
 import ict.nobida.utils.Utils;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
@@ -11,10 +12,12 @@ import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.util.Bytes;
 
 //for big packet
 public class NobidaCount {
@@ -28,8 +31,14 @@ public class NobidaCount {
 				//bigpack = rr.getValue(ncInit.indexcf, ncInit.d);
 //				int num = bigpack.length;
 //				num1 = Bytes.toLong(bigpack);
-				count += 1;
-				ncInit.rtCount[index] += 1;
+				int ii = rr.getColumn(Init.indexcf, Init.d).size();
+//				List<KeyValue> kVs = rr.getColumn(Init.indexcf, Init.d);
+//				for(int i =0; i< kVs.size(); ++i){
+//					System.out.println(Bytes.toInt(kVs.get(i).getValue()));
+//				}
+//				System.out.println(kVs.size());
+				count += ii;
+				ncInit.rtCount[index] += ii;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,8 +64,8 @@ public class NobidaCount {
 			} else {
 				s.setCaching(ncInit.cacheCount);
 			}
-			s.setFilter(new org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter());
-			//s.addColumn(ncInit.indexcf, ncInit.d);
+			//s.setFilter(new org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter());
+			s.addColumn(ncInit.indexcf, ncInit.d);
 			scanner = hTable.getScanner(s);
 		}catch(IOException e) {
 			e.printStackTrace();
