@@ -1,0 +1,26 @@
+thread.num=1
+prefix.count.of.the.process=1
+prefix.start.num.of.the.process=0
+commit.count=500
+insert.count=20000
+start.instert.num=0
+Statistics.interval=5
+write.ahead.log=false
+data.size=100
+big.packet.size=10
+
+hbase.config.path=/home/hadoop/test/lib/121lib/hbase-site.xml
+zk.addr=10.60.1.121
+distinct.count=10
+table.name=insert1
+pre.splits.count=20
+index.count=0
+only.count=true
+scan.start.time="2013-10-10 09:55:00"
+scan.end.time="2013-10-10 10:00:00"
+filters=s:251.0.0.*,d:252.0.0.1,sp:1001
+get.fields=b:a,b:f
+scan.result.filepath=result
+scan.count=1000
+scan.cache.count=1000
+scan.result.sort=true
