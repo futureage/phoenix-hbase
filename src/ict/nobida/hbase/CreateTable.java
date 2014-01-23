@@ -3,27 +3,18 @@ package ict.nobida.hbase;
 import ict.nobida.utils.Init;
 import ict.nobida.utils.Utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.TableExistsException;
 import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
-import org.apache.hadoop.hbase.util.Bytes;
 public class CreateTable {
 	public boolean createTable(String tablename, byte[][] splits, String[] cf)
 			throws IOException {
-		HBaseAdmin admin = new HBaseAdmin(init.config);
+		HBaseAdmin admin = new HBaseAdmin(Init.config);
 		HTableDescriptor des = new HTableDescriptor(tablename);
 		try {
 			if (admin.tableExists(tablename)) {
