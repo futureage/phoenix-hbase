@@ -64,7 +64,7 @@ public class NobidaCount {
 				s.setCaching(ncInit.cacheCount);
 			}
 			//s.setFilter(new org.apache.hadoop.hbase.filter.FirstKeyOnlyFilter());
-			s.addColumn(ncInit.indexcf, ncInit.d);
+			s.addColumn(Init.indexcf, Init.d);
 			scanner = hTable.getScanner(s);
 		}catch(IOException e) {
 			e.printStackTrace();
