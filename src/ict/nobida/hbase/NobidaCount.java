@@ -36,7 +36,6 @@ public class NobidaCount {
 //				for(int i =0; i< kVs.size(); ++i){
 //					System.out.println(Bytes.toInt(kVs.get(i).getValue()));
 //				}
-//				System.out.println(kVs.size());
 				count += ii;
 				ncInit.rtCount[index] += ii;
 			}
