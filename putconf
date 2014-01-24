@@ -1,5 +1,5 @@
-thread.num=1
-prefix.count.of.the.process=1
+thread.num=20
+prefix.count.of.the.process=20
 prefix.start.num.of.the.process=0
 commit.count=500
 insert.count=1
@@ -13,7 +13,7 @@ hbase.config.path=/home/hadoop/test/lib/121lib/hbase-site.xml
 zk.addr=10.60.1.121
 distinct.count=10
 table.name=ttt
-pre.splits.count=1
+pre.splits.count=20
 index.count=0
 only.count=true
 scan.start.time="2013-10-10 09:55:00"

@@ -58,7 +58,7 @@ public class CreateTable {
 	}
 	public boolean createIndexTable(String IndexName, byte[][] splits, String cf)
 			throws IOException {
-		HBaseAdmin admin = new HBaseAdmin(init.config);
+		HBaseAdmin admin = new HBaseAdmin(Init.config);
 		HTableDescriptor des = new HTableDescriptor(IndexName);
 		try {
 			if (admin.tableExists(IndexName)) {
@@ -82,7 +82,7 @@ public class CreateTable {
 		byte[][] split4=null;
 		HBaseAdmin admin = null;
 		try {
-			admin = new HBaseAdmin(init.config);
+			admin = new HBaseAdmin(Init.config);
 		} catch (MasterNotRunningException e1) {
 			e1.printStackTrace();
 		} catch (ZooKeeperConnectionException e1) {
@@ -96,15 +96,15 @@ public class CreateTable {
 			split4=Utils.getSplitidx(preSplitsCount);
 		}
 		try{
-			createTable(init.tableName,splits,init.cfs);
+			createTable(init.tableName,splits,Init.cfs);
 			if(init.idxt1 != null)
-				createTable(init.tableName+"idx1",split1,init.idxcf);
+				createTable(init.tableName+"idx1",split1,Init.idxcf);
 			if(init.idxt2 != null)
-				createTable(init.tableName+"idx2",split2,init.idxcf);
+				createTable(init.tableName+"idx2",split2,Init.idxcf);
 			if(init.idxt3 != null)
-				createTable(init.tableName+"idx3",split3,init.idxcf);
+				createTable(init.tableName+"idx3",split3,Init.idxcf);
 			if(init.idxt4 != null)
-				createTable1(admin,init.tableName+"idx4",split4,init.idxcf);
+				createTable1(admin,init.tableName+"idx4",split4,Init.idxcf);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -116,10 +116,10 @@ public class CreateTable {
 		createT.init.init("putconf");
 		byte[][] splits=null;
 
-		if(createT.init.preSplitsCount> 1) {
-			splits=Utils.getSplitV2(createT.init.preSplitsCount);
+		if(Init.preSplitsCount> 1) {
+			splits=Utils.getSplitV2(Init.preSplitsCount);
 		}
-		createT.ct(createT.init.tableName,createT.init.preSplitsCount,createT.init.cfs);
+		createT.ct(createT.init.tableName,Init.preSplitsCount,Init.cfs);
 	}
 }
 

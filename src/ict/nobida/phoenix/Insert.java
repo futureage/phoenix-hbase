@@ -14,20 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Insert {
-	//\"b\".\"a\" BINARY(1), \"b\".\"d\" INTEGER, \"b\".\"dp\" BIGINT, \"b\".\"s\" BOOLEAN, \"b\".\"sp\" DOUBLE,  \"d\".\"z\" VARCHAR)"
-	byte a = (byte)1;
-	int d = 10;
-	long dp = 100L;
-	Boolean s = true;
-	double sp = 9.9;
-	String z= "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-	
-	Date aa = null;
-	int dd = 10;
-	long ddp = 100L;
-	Boolean ss = true;
-	double ssp = 9.9;
-	String zz= "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 	
 	PreparedStatement ppst1(PreparedStatement pp, long lrk) throws SQLException {
 		//k BIGINT not null primary key,b.d VARCHAR, b.dp VARCHAR, b.s VARCHAR, b.sp VARCHAR,  d.z VARCHAR

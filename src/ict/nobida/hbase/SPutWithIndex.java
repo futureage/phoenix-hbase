@@ -39,10 +39,10 @@ public class SPutWithIndex {
 			HTableInterface idx1,HTableInterface idx2,HTableInterface idx3,HTableInterface idx4, 
 			int ttt)  throws IOException {
 		rowkey[0] = (byte) pre;
-		long lrk = Utils.timeChange(init.scanStart, null)+ init.counter.incrementAndGet();
+		long lrk = Utils.timeChange(init.scanStart, null)+ Init.counter.incrementAndGet();
 		System.arraycopy(Bytes.toBytes(lrk), 0, rowkey, 1, 8);
 		Put metaPut = new Put(rowkey);
-		metaPut.setWriteToWAL(false);
+		metaPut.setWriteToWAL(init.wal);
 		int a1 = ttt;
 		int a2 = init.rand.nextInt(1000000);
 		int a3 = init.rand.nextInt(100000);
@@ -73,7 +73,7 @@ public class SPutWithIndex {
 		if(!mainPut.isEmpty() ) {
 			byte[] idxrk = Utils.genRowkeyforidx((byte)i, value, rk);
 			Put indexPut = new Put(idxrk);
-			indexPut.setWriteToWAL(false);
+			indexPut.setWriteToWAL(init.wal);
 			indexPut.add(Init.indexcf, Bytes.toBytes("k"),null);
 			idxt.put(indexPut);
 		}
@@ -95,31 +95,31 @@ public class SPutWithIndex {
 		public void run() {
 			try {
 				HTableInterface metatable =null;
-				metatable = init.pool.getTable(tableName);
+				metatable = Init.pool.getTable(tableName);
 				metatable.setAutoFlush(false);
 				HTableInterface idx1 = null;
 				HTableInterface idx2 = null;
 				HTableInterface idx3 =null;
 				HTableInterface idx4 =null;
 				if(init.idxt1!=null) {
-					idx1 = init.pool.getTable(tableName+"idx1");
+					idx1 = Init.pool.getTable(tableName+"idx1");
 					idx1.setAutoFlush(false);
 					if(init.idxt2!=null) {
-						idx2 = init.pool.getTable(tableName+"idx2");
+						idx2 = Init.pool.getTable(tableName+"idx2");
 						idx2.setAutoFlush(false);
 						if(init.idxt3!=null) {
-							idx3 = init.pool.getTable(tableName+"idx3");
+							idx3 = Init.pool.getTable(tableName+"idx3");
 							idx3.setAutoFlush(false);
 							if(init.idxt4!=null) {
-								idx4 = init.pool.getTable(tableName+"idx4");
+								idx4 = Init.pool.getTable(tableName+"idx4");
 								idx4.setAutoFlush(false);
 							}
 						}
 					}
 				}
 
-				if(init.writeBuffer!=0) {
-					metatable.setWriteBufferSize(init.writeBuffer);
+				if(Init.writeBuffer!=0) {
+					metatable.setWriteBufferSize(Init.writeBuffer);
 				}
 				for(long i=0;i<countPerThread;++i) {
 					if(i%100==0) {
@@ -178,7 +178,7 @@ public class SPutWithIndex {
 	}
 
 	public void mutiput2(final String tableName,final int tt,long limit) throws InterruptedException{
-		final PutThread putts[] = new PutThread[init.preSplitsCount];
+		final PutThread putts[] = new PutThread[Init.preSplitsCount];
 		long insertstarttime = System.nanoTime();
 
 		long perlimit=-1;
@@ -198,7 +198,7 @@ public class SPutWithIndex {
 				putts[i] = new PutThread(tableName,i,perlimit0);
 			else 
 				putts[i] = new PutThread(tableName,i,perlimit);
-			putts[i].setName("ScanThread_" + i);
+			putts[i].setName("PutThread_" + i);
 			putts[i].start();
 		}
 
@@ -229,8 +229,8 @@ public class SPutWithIndex {
 		}
 		th.stop();
 		long insertendtime = System.nanoTime();
-		String ops = Utils.getresult(init.insertCount,insertstarttime/1000/1000,insertendtime/1000/1000);
-		System.out.println("put "+init.insertCount+", total time: "+(insertendtime - insertstarttime)/1000/1000
+		String ops = Utils.getresult(Init.insertCount,insertstarttime/1000/1000,insertendtime/1000/1000);
+		System.out.println("put "+Init.insertCount+", total time: "+(insertendtime - insertstarttime)/1000/1000
 				+" ms, average through: "+ ops+"/s");
 	} 
 	Init init = null;
@@ -241,7 +241,7 @@ public class SPutWithIndex {
 		bpp.init= new Init();
 		bpp.init.init("putconf");
 		try{
-			bpp.mutiput2(bpp.init.tableName,bpp.init.tt,bpp.init.insertCount);
+			bpp.mutiput2(bpp.init.tableName,bpp.init.tt,Init.insertCount);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

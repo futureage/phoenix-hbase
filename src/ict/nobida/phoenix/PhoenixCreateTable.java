@@ -17,7 +17,7 @@ public class PhoenixCreateTable {
     String sql2 = " (k BIGINT not null primary key," +
 			" dp BIGINT, s BOOLEAN," +
 			" sp DOUBLE,  z VARCHAR) SALT_BUCKETS=10";
-    String sql3 = " (k BIGINT not null primary key, b.d INTEGER, b.dp BIGINT, b.s BOOLEAN, b.y DOUBLE, d.z VARCHAR) SALT_BUCKETS=";
+    String sql3 = " (k BIGINT not null primary key, b.d INTEGER, b.dp BIGINT, b.s BOOLEAN, b.sp DOUBLE, d.z VARCHAR) SALT_BUCKETS=";
     
     String sql4 = " (k BIGINT not null primary key," +
 			"b.d VARCHAR, b.dp VARCHAR, b.s VARCHAR," +
